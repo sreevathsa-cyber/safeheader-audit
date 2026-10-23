@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SafeHeader Audit Report</title>
+<style>
+body{font-family:Arial,sans-serif;background:#0d1117;color:#e6edf3;margin:0;padding:24px}
+main{max-width:1200px;margin:auto}h1{color:#58a6ff}.card{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px;margin:12px 0}
+table{width:100%;border-collapse:collapse;background:#161b22}th,td{border:1px solid #30363d;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{background:#21262d}.note{color:#c9d1d9}.error{color:#ff7b72}a{color:#58a6ff}
+@media(max-width:800px){body{padding:10px}table{font-size:12px}th,td{padding:6px}}
+</style></head><body><main>
+<h1>🛡️ SafeHeader Audit</h1>
+<p class="note">Educational security-header and CORS configuration review. Findings require human validation.</p>
+<div class="card"><b>Target:</b> https://example.com/<br>
+<b>Scan time (UTC):</b> 2026-10-23T09:06:46+00:00<br>
+<b>HTTP status:</b> 200<br>
+<b>Final URL:</b> https://example.com/<br>
+<b>HTTPS URL supplied:</b> Yes</div>
+
+<h2>Findings</h2><table><thead><tr><th>Severity</th><th>Check</th><th>Status</th><th>Observation</th><th>Recommendation</th></tr></thead>
+<tbody><tr><td>Info</td><td>HTTPS</td><td>HTTPS URL</td><td>The supplied URL uses HTTPS. This check does not constitute a full TLS configuration audit.</td><td>Keep TLS certificates valid and use modern TLS configuration.</td></tr><tr><td>High</td><td>Content-Security-Policy</td><td>Missing</td><td>The Content-Security-Policy response header was not observed.</td><td>Helps restrict which sources a browser may load content from. Review the application before choosing a policy.</td></tr><tr><td>Medium</td><td>Strict-Transport-Security</td><td>Missing</td><td>The Strict-Transport-Security response header was not observed.</td><td>Tells compatible browsers to prefer HTTPS for future visits. Only enable after confirming HTTPS is correctly configured.</td></tr><tr><td>Low</td><td>X-Content-Type-Options</td><td>Missing</td><td>The X-Content-Type-Options response header was not observed.</td><td>Set to &#x27;nosniff&#x27; to reduce MIME-type sniffing risks.</td></tr><tr><td>Medium</td><td>X-Frame-Options</td><td>Missing</td><td>The X-Frame-Options response header was not observed.</td><td>Consider DENY or SAMEORIGIN, or use CSP frame-ancestors.</td></tr><tr><td>Low</td><td>Referrer-Policy</td><td>Missing</td><td>The Referrer-Policy response header was not observed.</td><td>Set a policy such as strict-origin-when-cross-origin to limit referrer information exposure.</td></tr><tr><td>Low</td><td>Permissions-Policy</td><td>Missing</td><td>The Permissions-Policy response header was not observed.</td><td>Restrict browser features that the site does not need.</td></tr><tr><td>Info</td><td>CORS configuration</td><td>No CORS allow-origin header observed</td><td>The response did not include Access-Control-Allow-Origin.</td><td>This may be appropriate. Configure CORS only if cross-origin browser access is required.</td></tr></tbody></table>
+<div class="card"><b>Limitations</b><p>This tool checks the initial HTTP response only. It does not crawl pages, authenticate, test exploitability, validate all TLS properties, or perform an active vulnerability scan. A missing header is not proof of a vulnerability. Use only on systems you own or are authorized to assess.</p></div>
+</main></body></html>

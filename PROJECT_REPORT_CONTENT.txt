@@ -1,0 +1,154 @@
+SafeHeader Audit — Automated Web Scanner
+Project Report
+
+Student Name: ______________________________
+Roll Number: _______________________________
+Course / Semester: _________________________
+Institution: _______________________________
+Guide / Faculty: ____________________________
+Date of Submission: ________________________
+
+1. ABSTRACT
+
+SafeHeader Audit is a lightweight Python-based website security configuration checker. It examines the initial HTTP response of a supplied website and records selected security headers, basic HTTPS URL usage, HTTP status, and visible CORS response-header configuration. The application generates HTML, JSON, and CSV reports to make the observations easy to review and preserve. The project is intended as an educational demonstration of HTTP communication, Python programming, basic web-security configuration, error handling, and report generation. It is not a full penetration-testing tool, and all findings require contextual validation.
+
+2. INTRODUCTION
+
+Web applications rely on HTTP response headers to communicate security-related browser policies. Examples include Content-Security-Policy, Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, and Permissions-Policy. Cross-Origin Resource Sharing (CORS) response headers also influence whether browser-based code from another origin can read a response. SafeHeader Audit provides a small, repeatable way to inspect these values.
+
+3. PROBLEM STATEMENT
+
+Manual review of response headers can be inconsistent for beginners. A simple tool is useful for collecting a standard set of observations and presenting them in a consistent report. However, header presence alone cannot prove that a website is secure, and missing headers do not always imply a vulnerability.
+
+4. OBJECTIVES
+
+- Build a Python tool that requests a user-supplied website URL.
+- Capture HTTP response status and selected response headers.
+- Check HTTPS URL usage.
+- Identify missing selected security headers for further review.
+- Summarize visible CORS configuration.
+- Export results to HTML, JSON, and CSV.
+- Handle malformed URLs and common connection failures gracefully.
+- Encourage authorized, ethical security testing.
+
+5. SCOPE
+
+The project checks the first HTTP response reached from the supplied URL. It does not crawl pages, test login flows, perform active exploitation, assess application logic, validate all TLS settings, or guarantee detection of vulnerabilities. It is suitable for a small educational demonstration and can be extended later.
+
+6. TOOLS AND TECHNOLOGIES
+
+- Programming language: Python 3
+- Core libraries: urllib, ssl, socket, csv, json, html, pathlib, argparse, datetime
+- Editor: Visual Studio Code or any text editor
+- Operating system: Windows, Linux, or macOS with Python installed
+- External dependencies: None
+
+7. SYSTEM REQUIREMENTS
+
+Hardware: A basic laptop or desktop with network access.
+Software: Python 3.10 or later recommended; a terminal or command prompt; a web browser to view the HTML report.
+Network: Internet access for the chosen authorized target. A connection failure is reported if the site cannot be reached.
+
+8. SYSTEM DESIGN AND METHODOLOGY
+
+Workflow:
+User enters authorized URL
+        ↓
+Validate and normalize URL
+        ↓
+Send one HTTP GET request with timeout
+        ↓
+Capture status, final URL, and response headers
+        ↓
+Check HTTPS usage, selected security headers, and CORS headers
+        ↓
+Create findings and recommendations
+        ↓
+Export HTML, JSON, and CSV reports
+
+9. IMPLEMENTATION
+
+The application is implemented in app.py. The normalize_url function checks the input scheme and hostname. The fetch_response function sends a GET request and handles HTTP error responses as responses with useful status/header information. The audit function collects response data and creates findings. The reporting functions export the findings to HTML, JSON, and CSV. The application uses the Python standard library, so no third-party installation is required.
+
+10. SECURITY CHECKS
+
+- HTTPS URL usage: notes whether the supplied URL uses HTTPS. This is not a complete TLS assessment.
+- Content-Security-Policy: checks whether the response includes a CSP header.
+- Strict-Transport-Security: checks whether HSTS is present.
+- X-Content-Type-Options: checks whether the header is present.
+- X-Frame-Options: checks whether the header is present.
+- Referrer-Policy: checks whether the header is present.
+- Permissions-Policy: checks whether the header is present.
+- CORS: records Access-Control-Allow-Origin and Access-Control-Allow-Credentials and flags combinations that warrant review.
+
+Severity labels are guidance for prioritizing review, not proof that a vulnerability can be exploited.
+
+11. HOW TO EXECUTE
+
+Windows:
+1. Extract the project ZIP.
+2. Open the folder in VS Code or Command Prompt.
+3. Run: python app.py https://example.com
+4. Replace the example with a website you own or are authorized to assess.
+5. Open the generated HTML report in the reports folder.
+
+If needed, use: py app.py https://example.com
+
+Linux/macOS:
+python3 app.py https://example.com
+
+12. TEST PLAN
+
+Test 1 — Valid reachable HTTPS URL: expected to capture a response status and produce three report files.
+Test 2 — URL without scheme: expected to default to HTTPS.
+Test 3 — Invalid URL text: expected to show a validation error.
+Test 4 — Unreachable host: expected to record a connection error and still produce reports.
+Test 5 — Site with selected headers: expected to mark observed headers as present.
+Test 6 — Site without selected headers: expected to record missing-header findings.
+Test 7 — CORS wildcard response: expected to describe the observed wildcard and recommend review; wildcard alone is not automatically a vulnerability.
+
+Actual results and screenshots must be added after running the project. Do not claim that a test passed until it has been executed.
+
+13. RESULTS
+
+The expected output is a command-line summary and three generated files: HTML, JSON, and CSV. The HTML report presents the target, scan time, status, findings, and recommendations. Add a screenshot of your actual run and a screenshot of the generated HTML report before submission.
+
+14. LIMITATIONS
+
+- Only the initial response is checked.
+- No site crawling or authenticated scanning.
+- No active exploitation or intrusive testing.
+- No comprehensive TLS audit.
+- Server responses can vary by route, user agent, geography, and time.
+- Missing headers may be intentional depending on the application.
+- CORS interpretation depends on application context and browser behavior.
+
+15. FUTURE ENHANCEMENTS
+
+- Add a graphical dashboard.
+- Add automated unit tests.
+- Add configurable severity rules.
+- Support scanning a list of authorized URLs with rate limits.
+- Integrate an OWASP ZAP baseline scan in a controlled, authorized environment.
+- Add a remediation tracking feature.
+
+16. CONCLUSION
+
+SafeHeader Audit demonstrates how Python can automate a basic review of selected website response headers and visible CORS configuration. It generates structured reports and provides recommendations for manual validation. The tool is intentionally limited and should be treated as an educational configuration checker rather than proof that a website is secure or insecure.
+
+17. REFERENCES
+
+- Python documentation, urllib request and error handling: https://docs.python.org/3/howto/urllib2.html
+- OWASP ZAP documentation: https://www.zaproxy.org/docs/
+- OWASP ZAP Baseline Scan: https://www.zaproxy.org/docs/docker/baseline-scan/
+
+Appendix A — Submission checklist
+[ ] app.py included
+[ ] requirements.txt included
+[ ] README.md included
+[ ] Project report saved as .docx
+[ ] Run completed on an authorized target
+[ ] Actual screenshots added
+[ ] HTML/JSON/CSV reports retained as evidence
+[ ] Files named according to the IBM submission instructions
+[ ] Platform certificate attached to the required form

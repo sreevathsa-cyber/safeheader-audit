@@ -1,0 +1,9 @@
+severity,check,status,details,recommendation
+Info,HTTPS,HTTPS URL,The supplied URL uses HTTPS. This check does not constitute a full TLS configuration audit.,Keep TLS certificates valid and use modern TLS configuration.
+High,Content-Security-Policy,Missing,The Content-Security-Policy response header was not observed.,Helps restrict which sources a browser may load content from. Review the application before choosing a policy.
+Medium,Strict-Transport-Security,Missing,The Strict-Transport-Security response header was not observed.,Tells compatible browsers to prefer HTTPS for future visits. Only enable after confirming HTTPS is correctly configured.
+Low,X-Content-Type-Options,Missing,The X-Content-Type-Options response header was not observed.,Set to 'nosniff' to reduce MIME-type sniffing risks.
+Medium,X-Frame-Options,Missing,The X-Frame-Options response header was not observed.,"Consider DENY or SAMEORIGIN, or use CSP frame-ancestors."
+Low,Referrer-Policy,Missing,The Referrer-Policy response header was not observed.,Set a policy such as strict-origin-when-cross-origin to limit referrer information exposure.
+Low,Permissions-Policy,Missing,The Permissions-Policy response header was not observed.,Restrict browser features that the site does not need.
+Info,CORS configuration,No CORS allow-origin header observed,The response did not include Access-Control-Allow-Origin.,This may be appropriate. Configure CORS only if cross-origin browser access is required.

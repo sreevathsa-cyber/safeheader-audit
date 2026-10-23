@@ -1,0 +1,86 @@
+{
+  "target": "https://example.com/",
+  "scanned_at_utc": "2026-10-23T09:06:46+00:00",
+  "status_code": 200,
+  "final_url": "https://example.com/",
+  "https": true,
+  "server": "cloudflare",
+  "content_type": "text/html; charset=utf-8",
+  "headers": {
+    "date": "Fri, 23 Oct 2026 09:06:46 GMT",
+    "content-type": "text/html; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "close",
+    "server": "cloudflare",
+    "last-modified": "Wed, 21 Oct 2026 20:09:25 GMT",
+    "allow": "GET, HEAD",
+    "accept-ranges": "bytes",
+    "age": "1",
+    "cf-cache-status": "HIT",
+    "cf-ray": "a4ef9671eea61c41-HKG",
+    "alt-svc": "h3=\":443\"; ma=86400"
+  },
+  "cors": {
+    "access_control_allow_origin": "",
+    "access_control_allow_credentials": ""
+  },
+  "findings": [
+    {
+      "severity": "Info",
+      "check": "HTTPS",
+      "status": "HTTPS URL",
+      "details": "The supplied URL uses HTTPS. This check does not constitute a full TLS configuration audit.",
+      "recommendation": "Keep TLS certificates valid and use modern TLS configuration."
+    },
+    {
+      "severity": "High",
+      "check": "Content-Security-Policy",
+      "status": "Missing",
+      "details": "The Content-Security-Policy response header was not observed.",
+      "recommendation": "Helps restrict which sources a browser may load content from. Review the application before choosing a policy."
+    },
+    {
+      "severity": "Medium",
+      "check": "Strict-Transport-Security",
+      "status": "Missing",
+      "details": "The Strict-Transport-Security response header was not observed.",
+      "recommendation": "Tells compatible browsers to prefer HTTPS for future visits. Only enable after confirming HTTPS is correctly configured."
+    },
+    {
+      "severity": "Low",
+      "check": "X-Content-Type-Options",
+      "status": "Missing",
+      "details": "The X-Content-Type-Options response header was not observed.",
+      "recommendation": "Set to 'nosniff' to reduce MIME-type sniffing risks."
+    },
+    {
+      "severity": "Medium",
+      "check": "X-Frame-Options",
+      "status": "Missing",
+      "details": "The X-Frame-Options response header was not observed.",
+      "recommendation": "Consider DENY or SAMEORIGIN, or use CSP frame-ancestors."
+    },
+    {
+      "severity": "Low",
+      "check": "Referrer-Policy",
+      "status": "Missing",
+      "details": "The Referrer-Policy response header was not observed.",
+      "recommendation": "Set a policy such as strict-origin-when-cross-origin to limit referrer information exposure."
+    },
+    {
+      "severity": "Low",
+      "check": "Permissions-Policy",
+      "status": "Missing",
+      "details": "The Permissions-Policy response header was not observed.",
+      "recommendation": "Restrict browser features that the site does not need."
+    },
+    {
+      "severity": "Info",
+      "check": "CORS configuration",
+      "status": "No CORS allow-origin header observed",
+      "details": "The response did not include Access-Control-Allow-Origin.",
+      "recommendation": "This may be appropriate. Configure CORS only if cross-origin browser access is required."
+    }
+  ],
+  "error": null
+}
